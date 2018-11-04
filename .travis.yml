@@ -3,10 +3,7 @@ branches:
   only:
     - master
     - dev
-    - /^greenkeeper/.*$/
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
-  - export PATH="$HOME/.yarn/bin:$PATH"
+    - /^greenkeper/.*$/
 cache:
   yarn: true
   directories:
