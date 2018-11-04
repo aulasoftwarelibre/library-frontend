@@ -1,0 +1,24 @@
+language: node_js
+branches:
+  only:
+    - master
+    - dev
+    - /^greenkeeper/.*$/
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
+  - export PATH="$HOME/.yarn/bin:$PATH"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - node
+script:
+  - yarn start
+  - yarn run cypress
+after_success:
+  - npm run report-coverage
+  - npm run deploy-docs
+  - npm run semantic-release

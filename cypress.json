@@ -1,1 +1,12 @@
-{}
+{
+  "baseUrl": "http://localhost:3000/#",
+  "videoUploadOnPasses": false,
+  "video": false,
+  "supportFile": "cypress/support/index.js",
+  "pluginsFile": "cypress/plugins/index.js",
+  "integrationFolder": "cypress/features",
+  "fixturesFolder": false,
+  "defaultCommandTimeout": 10000,
+  "viewportWidth": 1920,
+  "viewportHeight": 1080
+}
