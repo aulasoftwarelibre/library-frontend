@@ -1,43 +1,18 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import _ from "lodash";
+import styled from "styled-components";
+import { Layout } from "antd";
 
-import BookCard from "./components/BookCard";
+import BookList from "./components/BookList";
 
-const Container = styled.div`
+const { Header, Content } = Layout;
+
+const Container = styled(Layout)`
   height: 100vh;
-`;
-
-const BooksContainer = styled.div`
-  display: flex;
-  margin-top: 20px;
-  width: 700px;
-  flex-direction: column;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  ${props =>
-    !props.isLastRow &&
-    css`
-      margin-bottom: 10px;
-    `};
-`;
-
-const Element = styled.div`
-  ${props =>
-    !props.isLastElement &&
-    css`
-      margin-right: 10px;
-    `};
 `;
 
 const books = [
@@ -94,26 +69,14 @@ const books = [
 ];
 
 const App = () => {
-  const rows = _.chunk(books, 4);
   return (
     <Container>
-      <Wrapper>
-        <BooksContainer>
-          {rows.map((row, i) => (
-            <Row index={Math.random()} isLastElement={i + 1 === rows.length}>
-              {row.map((book, index) => (
-                <Element isLastElement={index + 1 === row.length}>
-                  <BookCard
-                    title={book.title}
-                    description={book.description}
-                    year={book.year}
-                  />
-                </Element>
-              ))}
-            </Row>
-          ))}
-        </BooksContainer>
-      </Wrapper>
+      <Header>Library</Header>
+      <Content>
+        <Wrapper>
+          <BookList books={books} />
+        </Wrapper>
+      </Content>
     </Container>
   );
 };

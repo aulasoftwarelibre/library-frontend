@@ -1,22 +1,26 @@
 import * as React from "react";
 import styled from "styled-components";
 
-const Card = styled.div`
-  width: 150px;
-  height: 160px;
-  border: 1px solid black;
-  padding: 10px;
+import { Card, Icon } from "antd";
+
+const Container = styled(Card)`
+  width: 300px;
 `;
 
-const BookCard = ({ title, description, year }) => (
-  <Card>
-    <p>{title}</p>
+const BookCard = ({ title, description, year, authors }) => (
+  <Container title={title} actions={[<Icon type="edit" />]}>
     <p>{description}</p>
-    <p>{year}</p>
-    <a href="/#" alt="Editar">
-      Editar
-    </a>
-  </Card>
+    {year && (
+      <p>
+        <b>Year:</b> {year}
+      </p>
+    )}
+    {authors && (
+      <p>
+        <b>Authors:</b> {authors}
+      </p>
+    )}
+  </Container>
 );
 
 export default BookCard;
