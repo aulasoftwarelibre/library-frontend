@@ -12,7 +12,7 @@ const BookCard = ({ title, description, year, authors }) => (
     <p>{description}</p>
     {year && (
       <p>
-        <b>Year:</b> {year}
+        <b>Año:</b> {year}
       </p>
     )}
     {authors && (

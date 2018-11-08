@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Layout } from "antd";
 
 import BookList from "./components/BookList";
@@ -15,70 +16,38 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const books = [
-  {
-    title: "El principito",
-    description: "Peaso libro",
-    year: "2018"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
-  },
-  {
-    title: "El niño del pijama de rayas",
-    description: "Que triste",
-    year: "2017"
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { books: [] };
   }
-];
 
-const App = () => {
-  return (
-    <Container>
-      <Header>Library</Header>
-      <Content>
-        <Wrapper>
-          <BookList books={books} />
-        </Wrapper>
-      </Content>
-    </Container>
-  );
-};
+  componentDidMount() {
+    axios
+      .get("http://library-heroku-production.herokuapp.com/api/books")
+      .then(response => {
+        const { data } = response;
+        this.setState({ books: data["hydra:member"] });
+      });
+  }
+
+  render() {
+    const isBookListEmpty = !this.state.books.length;
+    return (
+      <Container>
+        <Header>Library</Header>
+        <Content>
+          <Wrapper>
+            {isBookListEmpty ? (
+              "Librería vacía"
+            ) : (
+              <BookList books={this.state.books} />
+            )}
+          </Wrapper>
+        </Content>
+      </Container>
+    );
+  }
+}
 
 export default App;

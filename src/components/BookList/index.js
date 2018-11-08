@@ -33,9 +33,12 @@ const BookList = ({ books }) => {
   return (
     <BooksContainer>
       {rows.map((row, i) => (
-        <Row index={Math.random()} isLastElement={i + 1 === rows.length}>
+        <Row key={Math.random()} isLastElement={i + 1 === rows.length}>
           {row.map((book, index) => (
-            <Element isLastElement={index + 1 === row.length}>
+            <Element
+              key={Math.random()}
+              isLastElement={index + 1 === row.length}
+            >
               <BookCard
                 title={book.title}
                 description={book.description}
