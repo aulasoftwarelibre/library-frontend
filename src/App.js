@@ -14,6 +14,7 @@ const Container = styled(Layout)`
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding: 20px;
 `;
 
 class App extends Component {
@@ -37,13 +38,15 @@ class App extends Component {
       <Container>
         <Header>Library</Header>
         <Content>
-          <Wrapper>
-            {isBookListEmpty ? (
-              "Librería vacía"
-            ) : (
-              <BookList books={this.state.books} />
-            )}
-          </Wrapper>
+          <Layout>
+            <Wrapper>
+              {isBookListEmpty ? (
+                "Librería vacía"
+              ) : (
+                <BookList books={this.state.books} />
+              )}
+            </Wrapper>
+          </Layout>
         </Content>
       </Container>
     );
